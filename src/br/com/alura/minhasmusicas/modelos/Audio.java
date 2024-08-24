@@ -2,7 +2,7 @@ package br.com.alura.minhasmusicas.modelos;
 
 public class Audio {
     private String titulo;
-    private int duracao;
+    private int duracaoMinutos;
     private int anoLancamento;
     private int totalDeReproducoes;
     private int curtidas;
@@ -17,12 +17,12 @@ public class Audio {
     }
 
     // Estrutura da Duração
-    public int getDuracao () {
-        return duracao;
+    public int getDuracaoMinutos() {
+        return duracaoMinutos;
     }
 
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
+    public void setDuracaoMinutos(int duracaoMinutos) {
+        this.duracaoMinutos = duracaoMinutos;
     }
 
     // Estrutura do anolancamento
@@ -64,7 +64,7 @@ public class Audio {
     public void exibaFicha() {
         System.out.printf("Nome do título: %s %n", getTitulo());
         System.out.printf("Ano de lançamento: %d %n", getAnoLancamento());
-        System.out.printf("Duração em minutos: Aproximandamente %d minutos %n", getDuracao());
+        System.out.printf("Duração em minutos: Aproximandamente %d minutos %n", getDuracaoMinutos());
         System.out.printf("Número total de reproduções: %d %n", getTotalDeReproducoes());
         System.out.printf("%d pessoas curtiram essa obra %n", getCurtidas());
     }

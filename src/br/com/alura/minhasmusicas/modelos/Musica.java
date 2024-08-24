@@ -37,7 +37,7 @@ public class Musica extends Audio implements Avaliavel {
         System.out.printf("Gênero musical: %s %n", getGenero());
         System.out.printf("Album: %s %n", getAlbum());
         System.out.printf("Ano de lançamento: %d %n", getAnoLancamento());
-        System.out.printf("Duração em minutos: Aproximandamente %d minutos %n", getDuracao());
+        System.out.printf("Duração em minutos: Aproximandamente %d minutos %n", getDuracaoMinutos());
         System.out.printf("Número total de reproduções: %d %n", getTotalDeReproducoes());
         System.out.printf("%d pessoas curtiram essa obra %n", getCurtidas());
         System.out.printf("Dentre as %d pessoas que escutaram %s, %d por cento curtiram %n", getTotalDeReproducoes(),

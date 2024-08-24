@@ -13,7 +13,7 @@ public class Main {
         musica.setGenero("Hip-Hop/Rap");
         musica.setAlbum("Single");
         musica.setAnoLancamento(2024);
-        musica.setDuracao(4);
+        musica.setDuracaoMinutos(4);
 
         for (int x = 0; x < 1000; x++) {
             musica.reproduz();
@@ -28,15 +28,11 @@ public class Main {
 
         // Instanciamento de um objeto da classe Podcast
         Podcast podcast = new Podcast();
-        podcast.setTitulo("Ep.32- Dois Irmãos- Milton Hatoum- Resumo + Análise");
-        podcast.setHost("Fernando Anjos (Prof. Fefo)");
-        podcast.setDescricao("O livro 'Dois Irmãos', do escritor Milton Hatoum, foi lançado no ano de 2000" +
-                "e é considerada uma das obras mais importantes da Literatura brasileira contemporânea. Na narrativa," +
-                "dois irmãos gêmeos (Yaqub e Omar) lidam com sua semelhança e suas diferenças, o que traz à tona " +
-                "revelações, conflitos e o desafio de manter as relações familiares quando as bases já não parecem " +
-                "ser tão sólidas. Leitura obrigatória no vestibular da FUVEST. Vem ouvir o Resumo e a Análise");
-        podcast.setAnoLancamento(2023);
-        podcast.setDuracao(39);
+        podcast.setTitulo("CLÓVIS DE BARROS - FLOW #392");
+        podcast.setHost("Igor3K");
+        podcast.setDescricao("Outro episódio para você repensar sua vida toda");
+        podcast.setAnoLancamento(2024);
+        podcast.setDuracaoMinutos(120);
 
         for (int x = 0; x < 2000; x++) {
             podcast.reproduz();
