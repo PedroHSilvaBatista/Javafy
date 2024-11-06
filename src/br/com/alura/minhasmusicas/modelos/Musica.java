@@ -6,6 +6,13 @@ public class Musica extends Audio implements Avaliavel {
     private String album;
     private String genero;
 
+    public Musica(String titulo, int duracaoMinutos, int anoDeLancamento, String artista, String genero, String album){
+        super(titulo, duracaoMinutos, anoDeLancamento);
+        this.artista = artista;
+        this.genero = genero;
+        this.album = album;
+    }
+
     public String getArtista() {
         return artista;
     }

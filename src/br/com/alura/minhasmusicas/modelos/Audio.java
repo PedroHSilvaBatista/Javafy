@@ -7,6 +7,12 @@ public class Audio {
     private int totalDeReproducoes;
     private int curtidas;
 
+    public Audio(String titulo, int duracaoMinutos, int anoDeLancamento){
+        this.titulo = titulo;
+        this.duracaoMinutos = duracaoMinutos;
+        this.anoLancamento = anoDeLancamento;
+    }
+
     // Estrutura do Título
     public String getTitulo() {
         return titulo;

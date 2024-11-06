@@ -12,8 +12,8 @@ public class Main {
                 SEJA BEM VINDO AO JAVAFY!, SUA PLATAFORMA PREFERIDA DE MÚSICAS E PODCASTS
                 **************************************************************************
                 Escolha uma das opções abaixo:
-                1 - Inserir um novo título ao catálogo
-                2 - Listar os títulos cadastrados por você
+                1 - Sugerir um novo título ao catálogo
+                2 - Listar os títulos sugeridos por você
                 3 - Adicionar algum título para sua lista de favoritos
                 4 - Exibir o tempo de reprodução para todos os títulos da lista de favoritos
                 5 - Sair do programa
@@ -25,6 +25,7 @@ public class Main {
         List<Audio> listaDeAudios = new ArrayList<>();
         List<Musica> listaDeMusicas = new ArrayList<>();
         List<Podcast> listaDePodcasts = new ArrayList<>();
+        List<Audio> listaDeTitulosFavoritos = new ArrayList<>();
 
         // IMPLEMENTAÇÕES:
         // CRIAR UM MENU DE OPÇÕES PARA O USUÁRIO
@@ -52,7 +53,43 @@ public class Main {
                     String opcaoInserir = input.nextLine();
                     switch (opcaoInserir){
                         case "1":
-                            //
+                            System.out.println("Para recomendar uma nova música ao catálogo, preencha algumas informações importantes");
+
+                            System.out.print("Diga o nome da música que deseja cadastrar: ");
+                            String titulo = input.nextLine();
+
+                            System.out.print("Diga a duração aporoximada da música em minutos: ");
+                            int duracao = input.nextInt();
+
+                            System.out.print("Diga o ano de lançamento que a música foi lançada: ");
+                            int anoDeLancamento = input.nextInt();
+
+                            System.out.print("Diga o artista que produziu a música: ");
+                            String artista = input.nextLine();
+
+                            System.out.println("Diga o gênero da música: ");
+                            String genero = input.nextLine();
+
+                            System.out.print("Diga o album a qual a música pertence, caso seja um Single, digite Single: ");
+                            String album = input.nextLine();
+
+                            listaDeMusicas.add(new Musica(titulo, duracao, anoDeLancamento, artista, genero, album));
+                            System.out.println("Recomendação de música salva com sucesso!");
+
+                            System.out.println("Gostaria de adicionar sua música sugerida a lista de favoritos [S/N]?");
+                            String opcaoAdicionarAosFavoritos = input.nextLine();
+
+                            if(opcaoAdicionarAosFavoritos.toLowerCase().charAt(0) == 's'){
+                                for (int i = 0; i < listaDeMusicas.size(); i++){
+                                    if (listaDeMusicas.get(i).getTitulo().equals(titulo)){
+                                        listaDeTitulosFavoritos.add(listaDeMusicas.get(i));
+                                    }
+                                }
+                            } else if (opcaoAdicionarAosFavoritos.toLowerCase().charAt(0) == 'n'){
+                                System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
+                            } else {
+                                System.out.println("Por favor, digite apenas Sim ou Não");
+                            }
                             break;
                         case "2":
                             //

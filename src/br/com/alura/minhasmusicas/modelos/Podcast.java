@@ -5,6 +5,12 @@ public class Podcast extends Audio implements Avaliavel{
     private String host;
     private String descricao;
 
+    public Podcast(String titulo, int duracaoMinutos, int anoDeLancamento, String host, String descricao){
+        super(titulo, duracaoMinutos, anoDeLancamento);
+        this.host = host;
+        this.descricao = descricao;
+    }
+
     public String getHost() {
         return host;
     }
