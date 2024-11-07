@@ -4,6 +4,8 @@ import br.com.alura.minhasmusicas.classificacao.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Main {
 
@@ -56,43 +58,90 @@ public class Main {
                             System.out.println("Para recomendar uma nova música ao catálogo, preencha algumas informações importantes");
 
                             System.out.print("Diga o nome da música que deseja cadastrar: ");
-                            String titulo = input.nextLine();
+                            String tituloMusica = input.nextLine();
 
-                            System.out.print("Diga a duração aporoximada da música em minutos: ");
-                            int duracao = input.nextInt();
+                            System.out.print("Diga a duração aproximada da música em minutos: ");
+                            int duracaoMusica = input.nextInt();
 
                             System.out.print("Diga o ano de lançamento que a música foi lançada: ");
-                            int anoDeLancamento = input.nextInt();
+                            int anoDeLancamentoMusica = input.nextInt();
 
                             System.out.print("Diga o artista que produziu a música: ");
                             String artista = input.nextLine();
 
-                            System.out.println("Diga o gênero da música: ");
+                            System.out.print("Diga o gênero da música: ");
                             String genero = input.nextLine();
 
                             System.out.print("Diga o album a qual a música pertence, caso seja um Single, digite Single: ");
                             String album = input.nextLine();
 
-                            listaDeMusicas.add(new Musica(titulo, duracao, anoDeLancamento, artista, genero, album));
+                            listaDeMusicas.add(new Musica(tituloMusica, duracaoMusica, anoDeLancamentoMusica, artista, genero, album));
                             System.out.println("Recomendação de música salva com sucesso!");
 
-                            System.out.println("Gostaria de adicionar sua música sugerida a lista de favoritos [S/N]?");
-                            String opcaoAdicionarAosFavoritos = input.nextLine();
+                            for (Musica musica: listaDeMusicas) {
+                                if (musica.getTitulo().equals(tituloMusica)){
+                                    listaDeAudios.add(musica);
+                                }
+                            }
 
-                            if(opcaoAdicionarAosFavoritos.toLowerCase().charAt(0) == 's'){
-                                for (int i = 0; i < listaDeMusicas.size(); i++){
-                                    if (listaDeMusicas.get(i).getTitulo().equals(titulo)){
-                                        listaDeTitulosFavoritos.add(listaDeMusicas.get(i));
+                            System.out.print("Gostaria de adicionar sua música sugerida a lista de favoritos? [S/N]: ");
+                            String opcaoAdicionarMusicaAosFavoritos = input.nextLine();
+
+                            if(opcaoAdicionarMusicaAosFavoritos.toLowerCase().charAt(0) == 's'){
+                                for (Musica musica: listaDeMusicas){
+                                    if (musica.getTitulo().equals(tituloMusica)){
+                                        listaDeTitulosFavoritos.add(musica);
+                                        System.out.println("A música " + tituloMusica + " foi adicionada a lista de favoritos!");
                                     }
                                 }
-                            } else if (opcaoAdicionarAosFavoritos.toLowerCase().charAt(0) == 'n'){
+                            } else if (opcaoAdicionarMusicaAosFavoritos.toLowerCase().charAt(0) == 'n'){
                                 System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
                             } else {
                                 System.out.println("Por favor, digite apenas Sim ou Não");
                             }
                             break;
                         case "2":
-                            //
+                            System.out.println("Para recomendar um novo podcast ao catálogo, preencha algumas informações importantes");
+
+                            System.out.print("Diga o nome do podcast que deseja cadastrar: ");
+                            String tituloPodcast = input.nextLine();
+
+                            System.out.print("Diga a duração aproximada do podcast em minutos: ");
+                            int duracaoPodcast = input.nextInt();
+
+                            System.out.print("Diga o ano de lançamento que o podcast foi lançado: ");
+                            int anoDeLancamentoPodcast = input.nextInt();
+
+                            System.out.print("Diga qual é nome do host(apresentador) do podcast: ");
+                            String host = input.nextLine();
+
+                            System.out.print("Diga um pouco sobre o podcast a ser cadastrado: ");
+                            String descricao = input.nextLine();
+
+                            listaDePodcasts.add(new Podcast(tituloPodcast, duracaoPodcast, anoDeLancamentoPodcast, host, descricao));
+                            System.out.println("Recomendação de podcast salva com sucesso!");
+
+                            for (Podcast podcast: listaDePodcasts){
+                                if (podcast.getTitulo().equals(tituloPodcast)){
+                                    listaDeAudios.add(podcast);
+                                }
+                            }
+
+                            System.out.print("Gostaria de adicionar seu podcast sugerido a lista de favoritos? [S/N]: ");
+                            String opcaoAdicionarPodcastAosFavoritos = input.nextLine();
+
+                            if (opcaoAdicionarPodcastAosFavoritos.toLowerCase().charAt(0) == 's'){
+                                for (Podcast podcast: listaDePodcasts){
+                                    if (podcast.getTitulo().equals(tituloPodcast)) {
+                                        listaDeTitulosFavoritos.add(podcast);
+                                        System.out.println("O podcast " + tituloPodcast + " foi adicionada a lista de favoritos!");
+                                    }
+                                }
+                            } else if (opcaoAdicionarPodcastAosFavoritos.toLowerCase().charAt(0) == 'n'){
+                                System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
+                            } else {
+                                System.out.println("Por favor, digite apenas Sim ou Não");
+                            }
                             break;
                         default:
                             System.out.println("Por favor, digite uma das opções apresentadas");
@@ -109,7 +158,26 @@ public class Main {
                     String opcaoListar = input.nextLine();
                     switch (opcaoListar){
                         case "1":
-                            //
+                            Collections.sort(listaDeMusicas);
+                            System.out.println("Aqui estão as músicas sugeridas em ordem alfabética por nome de música: ");
+                            for (Musica musica: listaDeMusicas){
+                                System.out.println(musica);
+                            }
+
+                            System.out.println("Gostaria que fosse exibida também a lista de músicas por ordem de lançamento? [S/N]: ");
+                            String opcaoListarAnoDeLancamento = input.nextLine();
+
+                            if (opcaoListarAnoDeLancamento.toLowerCase().charAt(0) == 's'){
+                                listaDeMusicas.sort(Comparator.comparing(Musica::getAnoLancamento));
+                                System.out.println("Aqui estão as músicas em ordem de lançamento: ");
+                                for (Musica musica: listaDeMusicas){
+                                    System.out.println(musica);
+                                }
+                            } else if (opcaoListarAnoDeLancamento.toLowerCase().charAt(0) == 'n'){
+                                System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
+                            } else {
+                                System.out.println("Por favor, digite apenas Sim ou Não");
+                            }
                             break;
                         case "2":
                             //
@@ -154,8 +222,9 @@ public class Main {
                     break;
             }
         }
-
-
+        System.out.println(listaDeMusicas);
+        System.out.println(listaDePodcasts);
+        System.out.println(listaDeTitulosFavoritos);
         /*
         // Instanciamento do objeto de recomendação ao usuário
         FiltroRecomendacao filtro = new FiltroRecomendacao();

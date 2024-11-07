@@ -1,6 +1,6 @@
 package br.com.alura.minhasmusicas.modelos;
 
-public class Audio {
+public class Audio implements Comparable<Audio>{
     private String titulo;
     private int duracaoMinutos;
     private int anoLancamento;
@@ -73,5 +73,9 @@ public class Audio {
         System.out.printf("Duração em minutos: Aproximandamente %d minutos %n", getDuracaoMinutos());
         System.out.printf("Número total de reproduções: %d %n", getTotalDeReproducoes());
         System.out.printf("%d pessoas curtiram essa obra %n", getCurtidas());
+    }
+
+    public int compareTo(Audio outroAudio){
+        return this.getTitulo().compareTo(outroAudio.getTitulo());
     }
 }

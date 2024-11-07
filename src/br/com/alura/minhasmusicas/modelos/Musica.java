@@ -1,7 +1,7 @@
 package br.com.alura.minhasmusicas.modelos;
 import br.com.alura.minhasmusicas.classificacao.*;
 
-public class Musica extends Audio implements Avaliavel {
+public class Musica extends Audio implements Avaliavel{
     private String artista;
     private String album;
     private String genero;
@@ -54,5 +54,10 @@ public class Musica extends Audio implements Avaliavel {
     @Override
     public int getAvaliacao() {
         return getClassificacao();
+    }
+
+    @Override
+    public String toString(){
+        return this.getTitulo() + "- " + this.getArtista();
     }
 }

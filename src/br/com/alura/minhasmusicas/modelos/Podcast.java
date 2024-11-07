@@ -44,4 +44,9 @@ public class Podcast extends Audio implements Avaliavel{
     public int getAvaliacao() {
         return getClassificacao();
     }
+
+    @Override
+    public String toString(){
+        return this.getTitulo() + "- " + this.getHost();
+    }
 }
