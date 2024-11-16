@@ -4,7 +4,7 @@ public class Audio implements Comparable<Audio>{
     private String titulo;
     private int duracaoMinutos;
     private int anoLancamento;
-    private int totalDeReproducoes;
+    private int totalDeVisualizacoes;
     private int curtidas;
 
     public Audio(String titulo, int duracaoMinutos, int anoDeLancamento){
@@ -42,12 +42,12 @@ public class Audio implements Comparable<Audio>{
     }
 
     // Estrutura do totalDeReproducoes
-    public int getTotalDeReproducoes() {
-        return totalDeReproducoes;
+    public int getTotalDeVisualizacoes() {
+        return totalDeVisualizacoes;
     }
 
-    public void reproduz() {
-        totalDeReproducoes ++;
+    public void visualizaramSuaRecomendacao() {
+        totalDeVisualizacoes ++;
     }
 
     // Estrutura das curtidas
@@ -56,13 +56,13 @@ public class Audio implements Comparable<Audio>{
     }
 
     public void curte() {
-        curtidas ++;
+        curtidas++;
     }
 
     // Estrutura da classificacao
 
     public int getClassificacao() {
-        return (100 * getCurtidas()) / getTotalDeReproducoes();
+        return (100 * getCurtidas()) / getTotalDeVisualizacoes();
     }
 
     // Criando uma ficha de exibição
@@ -71,7 +71,7 @@ public class Audio implements Comparable<Audio>{
         System.out.printf("Nome do título: %s %n", getTitulo());
         System.out.printf("Ano de lançamento: %d %n", getAnoLancamento());
         System.out.printf("Duração em minutos: Aproximandamente %d minutos %n", getDuracaoMinutos());
-        System.out.printf("Número total de reproduções: %d %n", getTotalDeReproducoes());
+        System.out.printf("Número total de reproduções: %d %n", getTotalDeVisualizacoes());
         System.out.printf("%d pessoas curtiram essa obra %n", getCurtidas());
     }
 

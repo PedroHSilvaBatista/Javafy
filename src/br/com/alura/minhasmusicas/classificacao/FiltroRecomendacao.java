@@ -4,11 +4,11 @@ public class FiltroRecomendacao {
 
     public void filtra(Avaliavel avaliavel) {
         if (avaliavel.getAvaliacao() >= 90 && avaliavel.getAvaliacao() <= 100) {
-            System.out.println("O título é um dos mais relevantes no momento!");
+            System.out.println("O título sugerido por você fez sucesso e é está entre os mais cutidos da plataforma");
         } else if (avaliavel.getAvaliacao() >= 70) {
-            System.out.println("Titulo muito bem avaliado!");
+            System.out.println("O título sugerido por você é muito bem avaliado na plataforma!");
         } else {
-            System.out.println("Não deixe também de experimentar este título");
+            System.out.println("O título sugerido por você ainda não impactou um grande número de pesoas");
         }
     }
 }

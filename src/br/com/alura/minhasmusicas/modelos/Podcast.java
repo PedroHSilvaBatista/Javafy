@@ -34,9 +34,9 @@ public class Podcast extends Audio implements Avaliavel{
         System.out.printf("Descrição do episódio: %s %n", getDescricao());
         System.out.printf("Ano de lançamento: %d %n", getAnoLancamento());
         System.out.printf("Duração em minutos: Aproximandamente %d minutos %n", getDuracaoMinutos());
-        System.out.printf("Número total de reproduções: %d %n", getTotalDeReproducoes());
+        System.out.printf("Número total de reproduções: %d %n", getTotalDeVisualizacoes());
         System.out.printf("%d pessoas curtiram essa obra %n", getCurtidas());
-        System.out.printf("Dentre as %d pessoas que escutaram %s, %d por cento curtiram %n", getTotalDeReproducoes(),
+        System.out.printf("Dentre as %d pessoas que escutaram %s, %d por cento curtiram %n", getTotalDeVisualizacoes(),
                 getTitulo(), getAvaliacao());
     }
 

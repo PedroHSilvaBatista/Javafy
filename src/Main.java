@@ -1,5 +1,6 @@
 import br.com.alura.minhasmusicas.modelos.*;
 import br.com.alura.minhasmusicas.classificacao.*;
+import br.com.alura.minhasmusicas.calculos.CalculadoraDeTempo;
 
 import java.util.Scanner;
 import java.util.List;
@@ -11,14 +12,16 @@ public class Main {
 
     public static void menu(){
         System.out.println("""
-                SEJA BEM VINDO AO JAVAFY!, SUA PLATAFORMA PREFERIDA DE MÚSICAS E PODCASTS
-                **************************************************************************
+                SEJA BEM VINDO A COMUNIDADE JAVAFY! SUA PLATAFORMA PREFERIDA DE RECOMENDAÇÃO DE MÚSICAS E PODCASTS
+                **************************************************************************************************
                 Escolha uma das opções abaixo:
-                1 - Sugerir um novo título ao catálogo
+                1 - Sugerir um novo título à comunidade
                 2 - Listar os títulos sugeridos por você
-                3 - Exibir títulos da lista de favoritos
+                3 - Exibir títulos sugeridos por você e que foram adicionados a lista de favoritos
                 4 - Exibir o tempo de reprodução para todos os títulos da lista de favoritos
-                5 - Sair do programa
+                5 - Exibir a avaliação de um título sugerido
+                6 - Sair do programa
+                **************************************************************************************************
                 """);
     }
 
@@ -29,15 +32,6 @@ public class Main {
         List<Podcast> listaDePodcasts = new ArrayList<>();
         List<Audio> listaDeTitulosFavoritos = new ArrayList<>();
 
-        // IMPLEMENTAÇÕES:
-        // CRIAR UM MENU DE OPÇÕES PARA O USUÁRIO
-        // PEDIR PARA QUE O USUÁRIO CRIE SEUS OBJETOS
-        // CRIAR UM CONSTRUTOR PARA CADA CLASSE
-        // CLASSE ABSTRATA: NOME(TÍTULO), ANO DE LANÇAMENTO
-        // CLASSE MÚSICA: NOME(TÍTULO), ARTISTA, GÊNERO, ALBUM, ANO DE LANÇAMENTO E DURAÇÃO
-        // CLASSE PODCAST: TITULO, HOST, DESCRIÇÃO E DURAÇÃO
-        // ARMAZENAR OS OBJETOS DO USUÁRIO EM UMA LISTA
-
         boolean controle = true;
         while (controle) {
             menu();
@@ -47,7 +41,7 @@ public class Main {
             switch (opcaoUsuario) {
                 case "1":
                     System.out.println("""
-                            Dentre as categorias abaixo, qual gostaria que fosse adicionada?
+                            Dentre as categorias abaixo, qual gostaria de recomendar?
                             1 - Música
                             2 - Podcast
                             """);
@@ -55,9 +49,9 @@ public class Main {
                     String opcaoInserir = input.nextLine();
                     switch (opcaoInserir){
                         case "1":
-                            System.out.println("Para recomendar uma nova música ao catálogo, preencha algumas informações importantes");
+                            System.out.println("Para recomendar uma nova música à comunidade, primeiro preencha algumas informações importantes");
 
-                            System.out.print("Diga o nome da música que deseja cadastrar: ");
+                            System.out.print("Diga o nome da música que deseja recomendar: ");
                             String tituloMusica = input.nextLine();
 
                             System.out.print("Diga a duração aproximada da música em minutos: ");
@@ -67,6 +61,7 @@ public class Main {
                             int anoDeLancamentoMusica = input.nextInt();
 
                             System.out.print("Diga o artista que produziu a música: ");
+                            input.nextLine();
                             String artista = input.nextLine();
 
                             System.out.print("Diga o gênero da música: ");
@@ -81,6 +76,16 @@ public class Main {
                             for (Musica musica: listaDeMusicas) {
                                 if (musica.getTitulo().equals(tituloMusica)){
                                     listaDeAudios.add(musica);
+                                    // SIMULANDO UM SISTEMA DE CURTIDAS
+                                    int numeroCurtidasMusica = (int) (Math.random() * 1000) + 1;
+                                    for (int x=0; x < numeroCurtidasMusica; x++){
+                                        musica.curte();
+                                    }
+                                    // SIMULANDO UM SISTEMA DE VISUALIZAÇÕES DA SUGESTÃO DO USUÁRIO
+                                    int numeroReproducoes = (int) (Math.random() * (1000 - numeroCurtidasMusica + 1)) + numeroCurtidasMusica;
+                                    for (int i=0; i < numeroReproducoes; i++){
+                                        musica.visualizaramSuaRecomendacao();
+                                    }
                                 }
                             }
 
@@ -101,9 +106,9 @@ public class Main {
                             }
                             break;
                         case "2":
-                            System.out.println("Para recomendar um novo podcast ao catálogo, preencha algumas informações importantes");
+                            System.out.println("Para recomendar um novo podcast à comunidade, primeiro preencha algumas informações importantes");
 
-                            System.out.print("Diga o nome do podcast que deseja cadastrar: ");
+                            System.out.print("Diga o nome do podcast que deseja recomendar: ");
                             String tituloPodcast = input.nextLine();
 
                             System.out.print("Diga a duração aproximada do podcast em minutos: ");
@@ -113,9 +118,10 @@ public class Main {
                             int anoDeLancamentoPodcast = input.nextInt();
 
                             System.out.print("Diga qual é nome do host(apresentador) do podcast: ");
+                            input.nextLine();
                             String host = input.nextLine();
 
-                            System.out.print("Diga um pouco sobre o podcast a ser cadastrado: ");
+                            System.out.print("Diga um pouco sobre o podcast a ser recomendado: ");
                             String descricao = input.nextLine();
 
                             listaDePodcasts.add(new Podcast(tituloPodcast, duracaoPodcast, anoDeLancamentoPodcast, host, descricao));
@@ -124,6 +130,16 @@ public class Main {
                             for (Podcast podcast: listaDePodcasts){
                                 if (podcast.getTitulo().equals(tituloPodcast)){
                                     listaDeAudios.add(podcast);
+
+                                    int numeroCurtidasPodcast = (int) (Math.random() * 1000) + 1;
+                                    for (int c=0; c < numeroCurtidasPodcast; c++){
+                                        podcast.curte();
+                                    }
+
+                                    int numeroReproducoes = (int) (Math.random() * (1000 - numeroCurtidasPodcast + 1)) + numeroCurtidasPodcast;
+                                    for (int j=0; j < numeroReproducoes; j++){
+                                        podcast.visualizaramSuaRecomendacao();
+                                    }
                                 }
                             }
 
@@ -196,7 +212,7 @@ public class Main {
                                 System.out.println(podcast);
                             }
 
-                            System.out.println("Gostaria que fosse axibida também a lista de podcasts por ordem de lançamento? [S/N]: ");
+                            System.out.println("Gostaria que fosse exibida também a lista de podcasts por ordem de lançamento? [S/N]: ");
                             String opcaoListarAnoDeLancamentoPodcast = input.nextLine();
 
                             if (opcaoListarAnoDeLancamentoPodcast.toLowerCase().charAt(0) == 's'){
@@ -285,9 +301,83 @@ public class Main {
                     }
                     break;
                 case "4":
-                    //
+                    if (listaDeTitulosFavoritos.isEmpty()) {
+                        System.out.println("Você ainda não adicionou nenhum título a lista de favoritos, acrescente algum título para poder visualizar o tempo total de reprodução");
+                        break;
+                    }
+
+                    CalculadoraDeTempo calculadoraDeTempo = new CalculadoraDeTempo();
+                    for (Audio audio: listaDeTitulosFavoritos){
+                        calculadoraDeTempo.somaTempo(audio);
+                    }
+                    System.out.println("O tempo total de reprodução de todos os títulos favoritos é: "+ calculadoraDeTempo.getTempoEmMinutos() + "min");
                     break;
                 case "5":
+                    if (listaDeAudios.isEmpty()){
+                        System.out.println("Você ainda não sugeriu nenhum título, sugira algum título para ver o estado de avaliação");
+                        break;
+                    }
+                    System.out.println("""
+                            Dentre as categorias abaixo, qual gostaria de visualizar o estado de avaliação?
+                            1 - Música
+                            2 - Podcast
+                            """);
+                    System.out.print("Sua opção: ");
+                    String opcaoExibirAvaliacao = input.nextLine();
+                    FiltroRecomendacao filtro = new FiltroRecomendacao();
+                    switch (opcaoExibirAvaliacao){
+                        case "1":
+                            System.out.print("Digite o nome da música que gostaria de ver o estado de avaliação: ");
+                            String nomeDeBuscaMusica = input.nextLine();
+
+                            Musica musicaEncontrada = null;
+                            boolean encontrouMusica = false;
+                            for (Musica musica: listaDeMusicas){
+                                if (musica.getTitulo().equals(nomeDeBuscaMusica)){
+                                    musicaEncontrada = musica;
+                                    encontrouMusica = true;
+                                    break;
+                                }
+                            }
+
+                            if (encontrouMusica){
+                                filtro.filtra(musicaEncontrada);
+                                System.out.printf("Taxa de adesão da música %s: ", musicaEncontrada.getTitulo());
+                                System.out.printf("%d%% dos que visualiazaram sua recomendação aderiram sua sugestão%n", musicaEncontrada.getClassificacao());
+                            } else {
+                                System.out.printf("Não foi possível encontrar a música %s%n", nomeDeBuscaMusica);
+                                System.out.println("Cerifique-se de que a música inserida foi digitada corretamente");
+                            }
+                            break;
+                        case "2":
+                            System.out.print("Digite o nome do podcast que gostaria de ver o estado de avaliação: ");
+                            String nomeDeBuscaPodcast = input.nextLine();
+
+                            Podcast podcastEncontrado = null;
+                            boolean encontrouPodcast = false;
+                            for (Podcast podcast: listaDePodcasts){
+                                if (podcast.getTitulo().equals(nomeDeBuscaPodcast)){
+                                    podcastEncontrado = podcast;
+                                    encontrouPodcast = true;
+                                    break;
+                                }
+                            }
+
+                            if (encontrouPodcast){
+                                filtro.filtra(podcastEncontrado);
+                                System.out.printf("Taxa de adesão do podcast %s: ", podcastEncontrado.getTitulo());
+                                System.out.printf("%d%% dos que visualiazaram sua recomendação aderiram sua sugestão%n", podcastEncontrado.getClassificacao());
+                            } else {
+                                System.out.printf("Não foi possível encontrar o podcast %s%n", nomeDeBuscaPodcast);
+                                System.out.println("Certifique-se de que o podcast inserido foi digitado corretamente");
+                            }
+                            break;
+                        default:
+                            System.out.println("Por favor, digite uma opção válida");
+                            break;
+                    }
+                    break;
+                case "6":
                     System.out.println("Volte sempre :)");
                     System.out.println("Encerrando o programa...");
                     controle = false;
@@ -300,46 +390,5 @@ public class Main {
         System.out.println(listaDeMusicas);
         System.out.println(listaDePodcasts);
         System.out.println(listaDeTitulosFavoritos);
-        /*
-        // Instanciamento do objeto de recomendação ao usuário
-        FiltroRecomendacao filtro = new FiltroRecomendacao();
-
-        // Istanciamento de um objeto da classe Musica
-        Musica musica = new Musica();
-        musica.setTitulo("Not Like Us");
-        musica.setArtista("Kendrick Lamar");
-        musica.setGenero("Hip-Hop/Rap");
-        musica.setAlbum("Single");
-        musica.setAnoLancamento(2024);
-        musica.setDuracaoMinutos(4);
-
-        for (int x = 0; x < 1000; x++) {
-            musica.reproduz();
-        }
-        for (int x = 0; x < 890; x++) {
-            musica.curte();
-        }
-        musica.exibaFicha();
-        filtro.filtra(musica);
-
-        System.out.println();
-
-        // Instanciamento de um objeto da classe Podcast
-        Podcast podcast = new Podcast();
-        podcast.setTitulo("CLÓVIS DE BARROS - FLOW #392");
-        podcast.setHost("Igor3K");
-        podcast.setDescricao("Outro episódio para você repensar sua vida toda");
-        podcast.setAnoLancamento(2024);
-        podcast.setDuracaoMinutos(120);
-
-        for (int x = 0; x < 2000; x++) {
-            podcast.reproduz();
-        }
-        for (int x = 0; x < 2000; x++) {
-            podcast.curte();
-        }
-        podcast.exibaFicha();
-        filtro.filtra(podcast);
-        */
     }
 }
