@@ -47,6 +47,6 @@ public class Podcast extends Audio implements Avaliavel{
 
     @Override
     public String toString(){
-        return this.getTitulo() + "- " + this.getHost();
+        return this.getTitulo() + " - " + this.getHost();
     }
 }

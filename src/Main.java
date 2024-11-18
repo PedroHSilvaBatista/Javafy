@@ -11,6 +11,7 @@ import java.util.Comparator;
 public class Main {
 
     public static void menu(){
+        System.out.println();
         System.out.println("""
                 SEJA BEM VINDO A COMUNIDADE JAVAFY! SUA PLATAFORMA PREFERIDA DE RECOMENDAÇÃO DE MÚSICAS E PODCASTS
                 **************************************************************************************************
@@ -49,6 +50,7 @@ public class Main {
                     String opcaoInserir = input.nextLine();
                     switch (opcaoInserir){
                         case "1":
+                            System.out.println();
                             System.out.println("Para recomendar uma nova música à comunidade, primeiro preencha algumas informações importantes");
 
                             System.out.print("Diga o nome da música que deseja recomendar: ");
@@ -88,7 +90,7 @@ public class Main {
                                     }
                                 }
                             }
-
+                            System.out.println();
                             System.out.print("Gostaria de adicionar sua música sugerida a lista de favoritos? [S/N]: ");
                             String opcaoAdicionarMusicaAosFavoritos = input.nextLine();
 
@@ -108,20 +110,20 @@ public class Main {
                         case "2":
                             System.out.println("Para recomendar um novo podcast à comunidade, primeiro preencha algumas informações importantes");
 
-                            System.out.print("Diga o nome do podcast que deseja recomendar: ");
+                            System.out.print("Diga o título do podcast que deseja recomendar: ");
                             String tituloPodcast = input.nextLine();
 
-                            System.out.print("Diga a duração aproximada do podcast em minutos: ");
+                            System.out.print("Diga a duração aproximada do episódio em minutos: ");
                             int duracaoPodcast = input.nextInt();
 
-                            System.out.print("Diga o ano de lançamento que o podcast foi lançado: ");
+                            System.out.print("Diga o ano de lançamento que o episódio foi lançado: ");
                             int anoDeLancamentoPodcast = input.nextInt();
 
                             System.out.print("Diga qual é nome do host(apresentador) do podcast: ");
                             input.nextLine();
                             String host = input.nextLine();
 
-                            System.out.print("Diga um pouco sobre o podcast a ser recomendado: ");
+                            System.out.print("Diga um pouco sobre o episódio a ser recomendado: ");
                             String descricao = input.nextLine();
 
                             listaDePodcasts.add(new Podcast(tituloPodcast, duracaoPodcast, anoDeLancamentoPodcast, host, descricao));
@@ -161,9 +163,14 @@ public class Main {
                             break;
                         default:
                             System.out.println("Por favor, digite uma das opções apresentadas");
+                            break;
                     }
                     break;
                 case "2":
+                    if (listaDeAudios.isEmpty()){
+                        System.out.println("Você ainda não sugeriu nenhum título, sugira algum título para poder visualizá-los aqui");
+                        break;
+                    }
                     System.out.println("""
                             Dentre as categorias abaixo qual gostaria que fosse exibida?
                             1 - Música
@@ -181,18 +188,21 @@ public class Main {
                             }
                             List<Musica> listaOrdenadaDeMusicas = new ArrayList<>(listaDeMusicas);
                             Collections.sort(listaOrdenadaDeMusicas);
+                            System.out.println();
                             System.out.println("Aqui estão as músicas sugeridas em ordem alfabética por nome de música: ");
                             for (Musica musica: listaOrdenadaDeMusicas){
-                                System.out.println(musica);
+                                System.out.println("● " + musica);
                             }
 
-                            System.out.println("Gostaria que fosse exibida também a lista de músicas por ordem de lançamento? [S/N]: ");
+                            System.out.println();
+                            System.out.print("Gostaria que fosse exibida também a lista de músicas por ordem de lançamento? [S/N]: ");
                             String opcaoListarAnoDeLancamentoMusica = input.nextLine();
+                            System.out.println();
                             if (opcaoListarAnoDeLancamentoMusica.toLowerCase().charAt(0) == 's'){
                                 listaOrdenadaDeMusicas.sort(Comparator.comparing(Musica::getAnoLancamento));
                                 System.out.println("Aqui estão as músicas em ordem de lançamento: ");
                                 for (Musica musica: listaDeMusicas){
-                                    System.out.println(musica);
+                                    System.out.println("● " + musica);
                                 }
                             } else if (opcaoListarAnoDeLancamentoMusica.toLowerCase().charAt(0) == 'n'){
                                 System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
@@ -207,18 +217,20 @@ public class Main {
                             }
                             List<Podcast> listaOrdenadaDePodcasts = new ArrayList<>(listaDePodcasts);
                             Collections.sort(listaOrdenadaDePodcasts);
+                            System.out.println();
                             System.out.println("Aqui estão os podcasts sugeridos em ordem alfabética por nome do podcast: ");
                             for (Podcast podcast: listaOrdenadaDePodcasts){
-                                System.out.println(podcast);
+                                System.out.println("● " + podcast);
                             }
 
-                            System.out.println("Gostaria que fosse exibida também a lista de podcasts por ordem de lançamento? [S/N]: ");
+                            System.out.print("Gostaria que fosse exibida também a lista de podcasts por ordem de lançamento? [S/N]: ");
                             String opcaoListarAnoDeLancamentoPodcast = input.nextLine();
 
+                            System.out.println();
                             if (opcaoListarAnoDeLancamentoPodcast.toLowerCase().charAt(0) == 's'){
                                 listaOrdenadaDePodcasts.sort(Comparator.comparing(Podcast::getAnoLancamento));
                                 for (Podcast podcast: listaOrdenadaDePodcasts){
-                                    System.out.println(podcast);
+                                    System.out.println("● " + podcast);
                                 }
                             } else if (opcaoListarAnoDeLancamentoPodcast.toLowerCase().charAt(0) == 'n') {
                                 System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
@@ -227,24 +239,22 @@ public class Main {
                             }
                             break;
                         case "3":
-                            if (listaDeAudios.isEmpty()){
-                                System.out.println("Você ainda não sugeriu nenhum título, sugira algum título para poder visualizá-los aqui");
-                                break;
-                            }
                             List<Audio> listaOrdenadaDeAudios = new ArrayList<>(listaDeAudios);
                             Collections.sort(listaOrdenadaDeAudios);
+                            System.out.println();
                             System.out.println("Aqui estão todos os títulos sugeridos em ordem alfabética por nome: ");
                             for (Audio audio: listaDeAudios){
-                                System.out.println(audio);
+                                System.out.println("● " + audio);
                             }
 
-                            System.out.println("Gostaria que fosse exibido também a lista de títulos por ordem de lançamentos? [S/N]");
+                            System.out.print("Gostaria que fosse exibido também a lista de títulos por ordem de lançamentos? [S/N]: ");
                             String opcaoListarAnoDeLancamentoAudio = input.nextLine();
 
+                            System.out.println();
                             if (opcaoListarAnoDeLancamentoAudio.toLowerCase().charAt(0) == 's'){
                                 listaOrdenadaDeAudios.sort(Comparator.comparing(Audio::getAnoLancamento));
                                 for (Audio audio: listaOrdenadaDeAudios){
-                                    System.out.println(audio);
+                                    System.out.println("● " + audio);
                                 }
                             } else if(opcaoListarAnoDeLancamentoAudio.toLowerCase().charAt(0) == 'n'){
                                 System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
@@ -258,6 +268,7 @@ public class Main {
                     }
                     break;
                 case "3":
+                    System.out.println();
                     if (listaDeTitulosFavoritos.isEmpty()){
                         System.out.println("Você ainda não adicionou nenhum título a lista de favoritos, acrescente algum título para poder visualizá-lo aqui");
                         break;
@@ -273,27 +284,53 @@ public class Main {
                     switch (opcaoExibirListaDeFavoritos){
                         case "1":
                             //
-                            System.out.println("Lista de músicas adicionadas aos favoritos: ");
-                            for (Audio musica: listaDeTitulosFavoritos){
-                                if (musica instanceof Musica){
-                                    System.out.println(musica);
+                            boolean existeMusica = false;
+                            for (Audio buscaMusica: listaDeTitulosFavoritos){
+                                if (buscaMusica instanceof Musica){
+                                    existeMusica = true;
+                                    break;
                                 }
                             }
+
+                            System.out.println();
+                            if (existeMusica){
+                                System.out.println("Lista de músicas adicionadas aos favoritos: ");
+                                for (Audio musica: listaDeTitulosFavoritos){
+                                    if (musica instanceof Musica){
+                                        System.out.println("● " + musica);
+                                    }
+                                }
+                            }
+                            System.out.println("Você ainda não adicionou nenhuma música a lista de favoritos, favorite alguma música para visualizá-lo aqui");
                             break;
                         case "2":
                             //
-                            System.out.println("Lista de podcasts adicionadas aos favoritos: ");
-                            for (Audio podcast: listaDeTitulosFavoritos){
-                                if (podcast instanceof Podcast){
-                                    System.out.println(podcast);
+                            boolean existePodcast = false;
+                            for (Audio buscaPodcast: listaDeTitulosFavoritos){
+                                if (buscaPodcast instanceof Podcast){
+                                    existePodcast = true;
+                                    break;
                                 }
                             }
+
+                            System.out.println();
+                            if (existePodcast){
+                                System.out.println("Lista de podcasts adicionadas aos favoritos: ");
+                                for (Audio podcast: listaDeTitulosFavoritos){
+                                    if (podcast instanceof Podcast){
+                                        System.out.println("● " + podcast);
+                                        break;
+                                    }
+                                }
+                            }
+                            System.out.println("Você ainda não adicionou nenhum podcasts a lista de favoritos, favorite algum podcast para visualizá-lo aqui");
                             break;
                         case "3":
                             //
+                            System.out.println();
                             System.out.println("Lista de todos os títulos adicionados aos favoritos: ");
                             for (Audio audio: listaDeTitulosFavoritos){
-                                System.out.println(audio);
+                                System.out.println("● " + audio);
                             }
                             break;
                         default:
@@ -301,6 +338,7 @@ public class Main {
                     }
                     break;
                 case "4":
+                    System.out.println();
                     if (listaDeTitulosFavoritos.isEmpty()) {
                         System.out.println("Você ainda não adicionou nenhum título a lista de favoritos, acrescente algum título para poder visualizar o tempo total de reprodução");
                         break;
@@ -310,9 +348,10 @@ public class Main {
                     for (Audio audio: listaDeTitulosFavoritos){
                         calculadoraDeTempo.somaTempo(audio);
                     }
-                    System.out.println("O tempo total de reprodução de todos os títulos favoritos é: "+ calculadoraDeTempo.getTempoEmMinutos() + "min");
+                    System.out.println("O tempo total de reprodução de todos os títulos favoritos é: " + calculadoraDeTempo.getTempoEmMinutos() + "min");
                     break;
                 case "5":
+                    System.out.println();
                     if (listaDeAudios.isEmpty()){
                         System.out.println("Você ainda não sugeriu nenhum título, sugira algum título para ver o estado de avaliação");
                         break;
@@ -327,6 +366,7 @@ public class Main {
                     FiltroRecomendacao filtro = new FiltroRecomendacao();
                     switch (opcaoExibirAvaliacao){
                         case "1":
+                            System.out.println();
                             System.out.print("Digite o nome da música que gostaria de ver o estado de avaliação: ");
                             String nomeDeBuscaMusica = input.nextLine();
 
@@ -340,16 +380,18 @@ public class Main {
                                 }
                             }
 
+                            System.out.println();
                             if (encontrouMusica){
                                 filtro.filtra(musicaEncontrada);
                                 System.out.printf("Taxa de adesão da música %s: ", musicaEncontrada.getTitulo());
-                                System.out.printf("%d%% dos que visualiazaram sua recomendação aderiram sua sugestão%n", musicaEncontrada.getClassificacao());
+                                System.out.printf("%d%% dos que visualiazaram sua recomendação curtiram sua sugestão%n", musicaEncontrada.getClassificacao());
                             } else {
                                 System.out.printf("Não foi possível encontrar a música %s%n", nomeDeBuscaMusica);
                                 System.out.println("Cerifique-se de que a música inserida foi digitada corretamente");
                             }
                             break;
                         case "2":
+                            System.out.println();
                             System.out.print("Digite o nome do podcast que gostaria de ver o estado de avaliação: ");
                             String nomeDeBuscaPodcast = input.nextLine();
 
@@ -363,10 +405,11 @@ public class Main {
                                 }
                             }
 
+                            System.out.println();
                             if (encontrouPodcast){
                                 filtro.filtra(podcastEncontrado);
                                 System.out.printf("Taxa de adesão do podcast %s: ", podcastEncontrado.getTitulo());
-                                System.out.printf("%d%% dos que visualiazaram sua recomendação aderiram sua sugestão%n", podcastEncontrado.getClassificacao());
+                                System.out.printf("%d%% dos que visualiazaram sua recomendação curtiram sua sugestão%n", podcastEncontrado.getClassificacao());
                             } else {
                                 System.out.printf("Não foi possível encontrar o podcast %s%n", nomeDeBuscaPodcast);
                                 System.out.println("Certifique-se de que o podcast inserido foi digitado corretamente");
@@ -378,6 +421,7 @@ public class Main {
                     }
                     break;
                 case "6":
+                    System.out.println();
                     System.out.println("Volte sempre :)");
                     System.out.println("Encerrando o programa...");
                     controle = false;
@@ -387,8 +431,5 @@ public class Main {
                     break;
             }
         }
-        System.out.println(listaDeMusicas);
-        System.out.println(listaDePodcasts);
-        System.out.println(listaDeTitulosFavoritos);
     }
 }

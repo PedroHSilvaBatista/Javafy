@@ -58,6 +58,6 @@ public class Musica extends Audio implements Avaliavel{
 
     @Override
     public String toString(){
-        return this.getTitulo() + "- " + this.getArtista();
+        return this.getTitulo() + " - " + this.getArtista();
     }
 }
