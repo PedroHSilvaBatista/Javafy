@@ -1,5 +1,6 @@
 package br.com.alura.minhasmusicas.modelos;
 
+// CLASSE ABSTRATA
 public class Audio implements Comparable<Audio>{
     private String titulo;
     private int duracaoMinutos;
@@ -13,60 +14,48 @@ public class Audio implements Comparable<Audio>{
         this.anoLancamento = anoDeLancamento;
     }
 
-    // Estrutura do Título
+    // MÉTODO GETTER DO ATRIBUTO TITULO
     public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    // Estrutura da Duração
+    // MÉTODO GETTER DO ATRIBUTO DURACAOEMMINUTOS
     public int getDuracaoMinutos() {
         return duracaoMinutos;
     }
 
-    public void setDuracaoMinutos(int duracaoMinutos) {
-        this.duracaoMinutos = duracaoMinutos;
-    }
-
-    // Estrutura do anolancamento
-
+    // MÉTODO GETTER DO ATRIBUTO ANODELANCAMENTO
     public int getAnoLancamento() {
         return anoLancamento;
     }
 
-    public void setAnoLancamento(int anoLancamento) {
-        this.anoLancamento = anoLancamento;
-    }
-
-    // Estrutura do totalDeReproducoes
+    // MÉTODO GETTER DO ATRIBUTO TOTALDEVISUALIZACOES
     public int getTotalDeVisualizacoes() {
         return totalDeVisualizacoes;
     }
 
-    public void visualizaramSuaRecomendacao() {
-        totalDeVisualizacoes ++;
-    }
-
-    // Estrutura das curtidas
+    // MÉTODO GETTER DO ATRIBUTO CURTIDAS
     public int getCurtidas() {
         return curtidas;
     }
 
+    // MÉTODO QUE VISUALIZA UM OBJETO SUGERIDO PELO USUÁRIO
+    public void visualizaramSuaRecomendacao() {
+        totalDeVisualizacoes ++;
+    }
+
+    // MÉTODO QUE CURTE UM OBJETO SUGERIDO PELO USUÁRIO
     public void curte() {
         curtidas++;
     }
 
-    // Estrutura da classificacao
-
+    // ESTRUTURA UTILIZADA PARA CLASSIFICAR UM OBJETO
     public int getClassificacao() {
         return (100 * getCurtidas()) / getTotalDeVisualizacoes();
     }
 
-    // Criando uma ficha de exibição
-
+    // MÉTODO QUE EXIBE A FICHA TÉCNICA DO OBJETO INSTANCIADO DA CLASSE PODCAST
+    // TAL MÉTODO SERÁ USADO EM IMPLÈMENTAÇÕES FUTURAS
     public void exibaFicha() {
         System.out.printf("Nome do título: %s %n", getTitulo());
         System.out.printf("Ano de lançamento: %d %n", getAnoLancamento());
@@ -75,6 +64,8 @@ public class Audio implements Comparable<Audio>{
         System.out.printf("%d pessoas curtiram essa obra %n", getCurtidas());
     }
 
+    // MÉTODO QUE COMPARA OBJETOS DA MESMA CLASSE
+    // NESSE CASO ESTAMOS COMPARANDO OS OBJETOS (OBJETOS QUE HERDAM DE AUDIO) DE ACORDO COM A ORDEM ALFABÉTICA
     public int compareTo(Audio outroAudio){
         return this.getTitulo().compareTo(outroAudio.getTitulo());
     }
