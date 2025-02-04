@@ -4,11 +4,7 @@ import br.com.alura.minhasmusicas.classificacao.*;
 import br.com.alura.minhasmusicas.calculos.CalculadoraDeTempo;
 
 // MÓDULOS IMPORTADOS
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class Main {
 
@@ -63,127 +59,136 @@ public class Main {
                     String opcaoInserir = input.nextLine();
                     switch (opcaoInserir){
                         case "1":
-                            // ATRIBUTOS NECESSÁRIOS PARA INSTANCIAR UM OBJETO DA CLASSE MUSICA
-                            System.out.println();
-                            System.out.println("Para recomendar uma nova música à comunidade, primeiro preencha algumas informações importantes");
+                            try {
+                                // ATRIBUTOS NECESSÁRIOS PARA INSTANCIAR UM OBJETO DA CLASSE MUSICA
+                                System.out.println();
+                                System.out.println("Para recomendar uma nova música à comunidade, primeiro preencha algumas informações importantes");
 
-                            System.out.print("Diga o nome da música que deseja recomendar: ");
-                            String tituloMusica = input.nextLine();
+                                System.out.print("Diga o nome da música que deseja recomendar: ");
+                                String tituloMusica = input.nextLine();
 
-                            System.out.print("Diga a duração aproximada da música em minutos: ");
-                            int duracaoMusica = input.nextInt();
+                                System.out.print("Diga a duração aproximada da música em minutos: ");
+                                int duracaoMusica = input.nextInt();
 
-                            System.out.print("Diga o ano de lançamento que a música foi lançada: ");
-                            int anoDeLancamentoMusica = input.nextInt();
+                                System.out.print("Diga o ano de lançamento que a música foi lançada: ");
+                                int anoDeLancamentoMusica = input.nextInt();
 
-                            System.out.print("Diga o artista que produziu a música: ");
-                            input.nextLine();
-                            String artista = input.nextLine();
+                                System.out.print("Diga o artista que produziu a música: ");
+                                input.nextLine();
+                                String artista = input.nextLine();
 
-                            System.out.print("Diga o gênero da música: ");
-                            String genero = input.nextLine();
+                                System.out.print("Diga o gênero da música: ");
+                                String genero = input.nextLine();
 
-                            System.out.print("Diga o album a qual a música pertence, caso seja um Single, digite Single: ");
-                            String album = input.nextLine();
+                                System.out.print("Diga o album a qual a música pertence, caso seja um Single, digite Single: ");
+                                String album = input.nextLine();
 
-                            // ADIÇÂO DO OBJETO PREVIAMENTE CRIADO EM UMA LISTA QUE CONTERÁ APENAS OBJETOS DA CLASSE MUSICA
-                            listaDeMusicas.add(new Musica(tituloMusica, duracaoMusica, anoDeLancamentoMusica, artista, genero, album));
-                            System.out.println("Recomendação de música salva com sucesso!");
+                                // ADIÇÂO DO OBJETO PREVIAMENTE CRIADO EM UMA LISTA QUE CONTERÁ APENAS OBJETOS DA CLASSE MUSICA
+                                listaDeMusicas.add(new Musica(tituloMusica, duracaoMusica, anoDeLancamentoMusica, artista, genero, album));
+                                System.out.println("Recomendação de música salva com sucesso!");
 
-                            // ESTRUTURA DE BUSCA PARA ENCONTRAR O OBJETO RECÉM CRIADO
-                            for (Musica musica: listaDeMusicas) {
-                                if (musica.getTitulo().equals(tituloMusica)){
-                                    // ADICIONA O OBJETO ENCONTRADO EM UMA LISTA DE OBJETOS DAS CLASSES MUSICA E PODCAST
-                                    listaDeAudios.add(musica);
-                                    // SIMULA UM SISTEMA DE CURTIDAS AO OBJETO RECÉM CRIADO
-                                    int numeroCurtidasMusica = (int) (Math.random() * 1000) + 1;
-                                    for (int x=0; x < numeroCurtidasMusica; x++){
-                                        musica.curte();
-                                    }
-                                    // SIMULA UM SISTEMA DE VISUALIZAÇÕES DA SUGESTÃO DO USUÁRIO AO OBJETO RECÉM CRIADO
-                                    int numeroReproducoes = (int) (Math.random() * (1000 - numeroCurtidasMusica + 1)) + numeroCurtidasMusica;
-                                    for (int i=0; i < numeroReproducoes; i++){
-                                        musica.visualizaramSuaRecomendacao();
-                                    }
-                                }
-                            }
-                            System.out.println();
-                            System.out.print("Gostaria de adicionar sua música sugerida a lista de favoritos? [S/N]: ");
-                            String opcaoAdicionarMusicaAosFavoritos = input.nextLine();
-
-                            // ESTRUTURA DE BUSCA QUE ADICIONARÁ O OBJETO DA CLASSE MUSICA A LISTA DE FAVORITOS
-                            if(opcaoAdicionarMusicaAosFavoritos.toLowerCase().charAt(0) == 's'){
-                                for (Musica musica: listaDeMusicas){
+                                // ESTRUTURA DE BUSCA PARA ENCONTRAR O OBJETO RECÉM CRIADO
+                                for (Musica musica: listaDeMusicas) {
                                     if (musica.getTitulo().equals(tituloMusica)){
-                                        listaDeTitulosFavoritos.add(musica);
-                                        System.out.println("A música " + tituloMusica + " foi adicionada a lista de favoritos!");
+                                        // ADICIONA O OBJETO ENCONTRADO EM UMA LISTA DE OBJETOS DAS CLASSES MUSICA E PODCAST
+                                        listaDeAudios.add(musica);
+                                        // SIMULA UM SISTEMA DE CURTIDAS AO OBJETO RECÉM CRIADO
+                                        int numeroCurtidasMusica = (int) (Math.random() * 1000) + 1;
+                                        for (int x=0; x < numeroCurtidasMusica; x++){
+                                            musica.curte();
+                                        }
+                                        // SIMULA UM SISTEMA DE VISUALIZAÇÕES DA SUGESTÃO DO USUÁRIO AO OBJETO RECÉM CRIADO
+                                        int numeroReproducoes = (int) (Math.random() * (1000 - numeroCurtidasMusica + 1)) + numeroCurtidasMusica;
+                                        for (int i=0; i < numeroReproducoes; i++){
+                                            musica.visualizaramSuaRecomendacao();
+                                        }
                                     }
                                 }
-                            } else if (opcaoAdicionarMusicaAosFavoritos.toLowerCase().charAt(0) == 'n'){
-                                System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
-                            } else {
-                                System.out.println("Por favor, digite apenas Sim ou Não");
+                                System.out.println();
+                                System.out.print("Gostaria de adicionar sua música sugerida a lista de favoritos? [S/N]: ");
+                                String opcaoAdicionarMusicaAosFavoritos = input.nextLine();
+
+                                // ESTRUTURA DE BUSCA QUE ADICIONARÁ O OBJETO DA CLASSE MUSICA A LISTA DE FAVORITOS
+                                if(opcaoAdicionarMusicaAosFavoritos.toLowerCase().charAt(0) == 's'){
+                                    for (Musica musica: listaDeMusicas){
+                                        if (musica.getTitulo().equals(tituloMusica)){
+                                            listaDeTitulosFavoritos.add(musica);
+                                            System.out.println("A música " + tituloMusica + " foi adicionada a lista de favoritos!");
+                                        }
+                                    }
+                                } else if (opcaoAdicionarMusicaAosFavoritos.toLowerCase().charAt(0) == 'n'){
+                                    System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
+                                } else {
+                                    System.out.println("Por favor, digite apenas Sim ou Não");
+                                }
+                                break;
+                            } catch (InputMismatchException e) {
+                                throw new InputMismatchException("Digite um valor de entrada válido");
                             }
-                            break;
                         case "2":
-                            // ATRIBUTOS NECESSÁRIOS PARA INSTANCIAR UM OBJETO DA CLASSE PODCAST
-                            System.out.println("Para recomendar um novo podcast à comunidade, primeiro preencha algumas informações importantes");
+                            try {
+                                // ATRIBUTOS NECESSÁRIOS PARA INSTANCIAR UM OBJETO DA CLASSE PODCAST
 
-                            System.out.print("Diga o título do podcast que deseja recomendar: ");
-                            String tituloPodcast = input.nextLine();
+                                System.out.println("Para recomendar um novo podcast à comunidade, primeiro preencha algumas informações importantes");
 
-                            System.out.print("Diga a duração aproximada do episódio em minutos: ");
-                            int duracaoPodcast = input.nextInt();
+                                System.out.print("Diga o título do podcast que deseja recomendar: ");
+                                String tituloPodcast = input.nextLine();
 
-                            System.out.print("Diga o ano de lançamento que o episódio foi lançado: ");
-                            int anoDeLancamentoPodcast = input.nextInt();
+                                System.out.print("Diga a duração aproximada do episódio em minutos: ");
+                                int duracaoPodcast = input.nextInt();
 
-                            System.out.print("Diga qual é nome do host(apresentador) do podcast: ");
-                            input.nextLine();
-                            String host = input.nextLine();
+                                System.out.print("Diga o ano de lançamento que o episódio foi lançado: ");
+                                int anoDeLancamentoPodcast = input.nextInt();
 
-                            System.out.print("Diga um pouco sobre o episódio a ser recomendado: ");
-                            String descricao = input.nextLine();
+                                System.out.print("Diga qual é nome do host(apresentador) do podcast: ");
+                                input.nextLine();
+                                String host = input.nextLine();
 
-                            // ADIÇÂO DO OBJETO PREVIAMENTE CRIADO EM UMA LISTA QUE CONTERÁ APENAS OBJETOS DA CLASSE PODCAST
-                            listaDePodcasts.add(new Podcast(tituloPodcast, duracaoPodcast, anoDeLancamentoPodcast, host, descricao));
-                            System.out.println("Recomendação de podcast salva com sucesso!");
+                                System.out.print("Diga um pouco sobre o episódio a ser recomendado: ");
+                                String descricao = input.nextLine();
 
-                            // ESTRUTURA DE BUSCA PARA ENCONTRAR O OBJETO RECÉM CRIADO
-                            for (Podcast podcast: listaDePodcasts){
-                                if (podcast.getTitulo().equals(tituloPodcast)){
-                                    // ADICIONA O OBJETO ENCONTRADO EM UMA LISTA DE OBJETOS DAS CLASSES MUSICA E PODCAST
-                                    listaDeAudios.add(podcast);
-                                    // SIMULA UM SISTEMA DE CURTIDAS AO OBJETO RECÉM CRIADO
-                                    int numeroCurtidasPodcast = (int) (Math.random() * 1000) + 1;
-                                    for (int c=0; c < numeroCurtidasPodcast; c++){
-                                        podcast.curte();
-                                    }
-                                    // SIMULA UM SISTEMA DE VISUALIZAÇÕES DA SUGESTÃO DO USUÁRIO AO OBJETO RECÉM CRIADO
-                                    int numeroReproducoes = (int) (Math.random() * (1000 - numeroCurtidasPodcast + 1)) + numeroCurtidasPodcast;
-                                    for (int j=0; j < numeroReproducoes; j++){
-                                        podcast.visualizaramSuaRecomendacao();
-                                    }
-                                }
-                            }
+                                // ADIÇÂO DO OBJETO PREVIAMENTE CRIADO EM UMA LISTA QUE CONTERÁ APENAS OBJETOS DA CLASSE PODCAST
+                                listaDePodcasts.add(new Podcast(tituloPodcast, duracaoPodcast, anoDeLancamentoPodcast, host, descricao));
+                                System.out.println("Recomendação de podcast salva com sucesso!");
 
-                            System.out.print("Gostaria de adicionar seu podcast sugerido a lista de favoritos? [S/N]: ");
-                            String opcaoAdicionarPodcastAosFavoritos = input.nextLine();
-
-                            // ESTRUTURA DE BUSCA QUE ADICIONARÁ O OBJETO DA CLASSE MUSICA A LISTA DE FAVORITOS
-                            if (opcaoAdicionarPodcastAosFavoritos.toLowerCase().charAt(0) == 's'){
+                                // ESTRUTURA DE BUSCA PARA ENCONTRAR O OBJETO RECÉM CRIADO
                                 for (Podcast podcast: listaDePodcasts){
-                                    if (podcast.getTitulo().equals(tituloPodcast)) {
-                                        listaDeTitulosFavoritos.add(podcast);
-                                        System.out.println("O podcast " + tituloPodcast + " foi adicionada a lista de favoritos!");
+                                    if (podcast.getTitulo().equals(tituloPodcast)){
+                                        // ADICIONA O OBJETO ENCONTRADO EM UMA LISTA DE OBJETOS DAS CLASSES MUSICA E PODCAST
+                                        listaDeAudios.add(podcast);
+                                        // SIMULA UM SISTEMA DE CURTIDAS AO OBJETO RECÉM CRIADO
+                                        int numeroCurtidasPodcast = (int) (Math.random() * 1000) + 1;
+                                        for (int c=0; c < numeroCurtidasPodcast; c++){
+                                            podcast.curte();
+                                        }
+                                        // SIMULA UM SISTEMA DE VISUALIZAÇÕES DA SUGESTÃO DO USUÁRIO AO OBJETO RECÉM CRIADO
+                                        int numeroReproducoes = (int) (Math.random() * (1000 - numeroCurtidasPodcast + 1)) + numeroCurtidasPodcast;
+                                        for (int j=0; j < numeroReproducoes; j++){
+                                            podcast.visualizaramSuaRecomendacao();
+                                        }
                                     }
                                 }
-                            } else if (opcaoAdicionarPodcastAosFavoritos.toLowerCase().charAt(0) == 'n'){
-                                System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
-                            } else {
-                                System.out.println("Por favor, digite apenas Sim ou Não");
+
+                                System.out.print("Gostaria de adicionar seu podcast sugerido a lista de favoritos? [S/N]: ");
+                                String opcaoAdicionarPodcastAosFavoritos = input.nextLine();
+
+                                // ESTRUTURA DE BUSCA QUE ADICIONARÁ O OBJETO DA CLASSE MUSICA A LISTA DE FAVORITOS
+                                if (opcaoAdicionarPodcastAosFavoritos.toLowerCase().charAt(0) == 's'){
+                                    for (Podcast podcast: listaDePodcasts){
+                                        if (podcast.getTitulo().equals(tituloPodcast)) {
+                                            listaDeTitulosFavoritos.add(podcast);
+                                            System.out.println("O podcast " + tituloPodcast + " foi adicionada a lista de favoritos!");
+                                        }
+                                    }
+                                } else if (opcaoAdicionarPodcastAosFavoritos.toLowerCase().charAt(0) == 'n'){
+                                    System.out.println("Certo, por favor fique a vontade para navegar em nossas opções do menu");
+                                } else {
+                                    System.out.println("Por favor, digite apenas Sim ou Não");
+                                }
+                                break;
+                            } catch (InputMismatchException e){
+                                throw new InputMismatchException("Digite um valor de entrada válido");
                             }
-                            break;
                         default:
                             System.out.println("Por favor, digite uma das opções apresentadas");
                             break;
